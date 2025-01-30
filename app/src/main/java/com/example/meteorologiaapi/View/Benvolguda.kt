@@ -3,12 +3,14 @@ package com.example.meteorologiaapi.View
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,10 +40,11 @@ fun Banner() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp),
+            .height(60.dp)
+            .background(MaterialTheme.colorScheme.primary),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Banner", fontSize = 20.sp)
+        Text(text = "Banner", fontSize = 20.sp, color = Color.White)
     }
 }
 
@@ -53,7 +56,20 @@ fun Content() {
             .height(300.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Contenido Principal", fontSize = 18.sp)
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Contenido Principal", fontSize = 18.sp)
+            }
+        }
     }
 }
 
@@ -62,10 +78,11 @@ fun Footer() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp),
+            .height(50.dp)
+            .background(MaterialTheme.colorScheme.primary),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Footer", fontSize = 16.sp)
+        Text(text = "Footer", fontSize = 16.sp, color = Color.White)
     }
 }
 
@@ -74,4 +91,3 @@ fun Footer() {
 fun PreviewMainScreen() {
     MainScreen()
 }
-
