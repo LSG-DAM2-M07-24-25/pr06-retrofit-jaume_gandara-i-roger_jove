@@ -1,4 +1,7 @@
 package com.example.meteorologiaapi.ViewModel
 
-class WeatherViewModel {
+import androidx.lifecycle.ViewModel
+
+class WeatherViewModel : ViewModel()  {
+
 }
