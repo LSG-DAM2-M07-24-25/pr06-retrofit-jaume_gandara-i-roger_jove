@@ -3,8 +3,10 @@ package com.example.meteorologiaapi
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.meteorologiaapi.View.MainScreen
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
 import com.example.meteorologiaapi.Navigation.EntryPoint
+import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 import com.example.meteorologiaapi.ui.theme.MeteorologiaAPITheme
 
 class MainActivity : ComponentActivity() {
@@ -12,7 +14,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MeteorologiaAPITheme {
-                EntryPoint()
+                val navController = rememberNavController()
+                val weatherViewModel: WeatherViewModel = viewModel()
+                EntryPoint(navController, weatherViewModel)
             }
         }
     }
