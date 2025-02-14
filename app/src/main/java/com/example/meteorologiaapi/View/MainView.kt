@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -89,7 +90,7 @@ fun Header() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logo), // Asegúrate de añadir tu logo en res/drawable
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Weather Logo",
                 modifier = Modifier.size(48.dp)
             )
@@ -147,8 +148,25 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
                     BasicTextField(
                         value = text,
                         onValueChange = { text = it },
-                        textStyle = TextStyle(fontSize = 18.sp)
+                        textStyle = TextStyle(fontSize = 18.sp),
+                        modifier = Modifier.width(300.dp)
                     )
+
+                    Button(
+                        onClick = {
+                            // TODO: Implement search
+                        },
+                        colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                        contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp), // Elimina el padding intern del botó
+                        modifier = Modifier.size(32.dp).align(Alignment.CenterEnd)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Search",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
                 }
             }
         }
