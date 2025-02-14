@@ -18,8 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -42,9 +40,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.meteorologiaapi.Navigation.Routes
 import com.example.meteorologiaapi.R
 import com.example.meteorologiaapi.ViewModel.WeatherViewModel
+import com.example.meteorologiaapi.Component.Footer
 
 @Composable
 fun MainView(navigationController: NavController, weatherViewModel: WeatherViewModel) {
@@ -213,42 +211,5 @@ fun WeatherDetail(label: String, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = label, fontSize = 14.sp, color = Color.Gray)
         Text(text = value, fontSize = 16.sp, fontWeight = FontWeight.Medium)
-    }
-}
-
-@Composable
-fun Footer(navController: NavController) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary)
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Button(
-            onClick = { /* Acció */ },
-            colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Home,
-                contentDescription = "Home",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
-            )
-        }
-
-        Button(
-            onClick = {
-                navController.navigate(Routes.View3.createRoute())
-            },
-            colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = "Favorite",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
-            )
-        }
     }
 }
