@@ -42,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.meteorologiaapi.Navigation.Routes
 import com.example.meteorologiaapi.R
 import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 
@@ -68,7 +69,7 @@ fun MainView(navigationController: NavController, weatherViewModel: WeatherViewM
                 .align(Alignment.BottomCenter)
                 .background(MaterialTheme.colorScheme.primary)
         ) {
-            Footer()
+            Footer(navigationController)
         }
     }
 }
@@ -216,7 +217,7 @@ fun WeatherDetail(label: String, value: String) {
 }
 
 @Composable
-fun Footer() {
+fun Footer(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -237,7 +238,9 @@ fun Footer() {
         }
 
         Button(
-            onClick = { /* Acció */ },
+            onClick = {
+                navController.navigate(Routes.View3.createRoute())
+            },
             colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
         ) {
             Icon(
