@@ -1,6 +1,5 @@
 package com.example.meteorologiaapi.View
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,14 +33,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.meteorologiaapi.R
 import com.example.meteorologiaapi.ViewModel.WeatherViewModel
+import com.example.meteorologiaapi.Component.Header
 import com.example.meteorologiaapi.Component.Footer
 
 @Composable
@@ -68,37 +66,6 @@ fun MainView(navigationController: NavController, weatherViewModel: WeatherViewM
                 .background(MaterialTheme.colorScheme.primary)
         ) {
             Footer(navigationController)
-        }
-    }
-}
-
-@Composable
-fun Header() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .background(MaterialTheme.colorScheme.primary),
-        contentAlignment = Alignment.Center
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Weather Logo",
-                modifier = Modifier.size(48.dp)
-            )
-            Text(
-                text = "WeatherApp",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
         }
     }
 }
