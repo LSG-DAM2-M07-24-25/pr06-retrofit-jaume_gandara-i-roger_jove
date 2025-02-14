@@ -1,6 +1,5 @@
 package com.example.meteorologiaapi.View
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,8 +17,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -36,15 +33,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.meteorologiaapi.Navigation.Routes
-import com.example.meteorologiaapi.R
 import com.example.meteorologiaapi.ViewModel.WeatherViewModel
+import com.example.meteorologiaapi.Component.Header
+import com.example.meteorologiaapi.Component.Footer
 
 @Composable
 fun MainView(navigationController: NavController, weatherViewModel: WeatherViewModel) {
@@ -70,37 +66,6 @@ fun MainView(navigationController: NavController, weatherViewModel: WeatherViewM
                 .background(MaterialTheme.colorScheme.primary)
         ) {
             Footer(navigationController)
-        }
-    }
-}
-
-@Composable
-fun Header() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .background(MaterialTheme.colorScheme.primary),
-        contentAlignment = Alignment.Center
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Weather Logo",
-                modifier = Modifier.size(48.dp)
-            )
-            Text(
-                text = "WeatherApp",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
         }
     }
 }
@@ -213,42 +178,5 @@ fun WeatherDetail(label: String, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = label, fontSize = 14.sp, color = Color.Gray)
         Text(text = value, fontSize = 16.sp, fontWeight = FontWeight.Medium)
-    }
-}
-
-@Composable
-fun Footer(navController: NavController) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary)
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Button(
-            onClick = { /* Acció */ },
-            colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Home,
-                contentDescription = "Home",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
-            )
-        }
-
-        Button(
-            onClick = {
-                navController.navigate(Routes.View3.createRoute())
-            },
-            colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = "Favorite",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
-            )
-        }
     }
 }
