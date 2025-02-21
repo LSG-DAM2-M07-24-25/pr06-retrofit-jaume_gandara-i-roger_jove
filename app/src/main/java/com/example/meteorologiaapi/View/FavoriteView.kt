@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.meteorologiaapi.Component.Footer
 import com.example.meteorologiaapi.Component.Header
-import com.example.meteorologiaapi.Component.WeatherContent
+import com.example.meteorologiaapi.Component.WeatherFavoriteContent
 import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 
 @Composable
@@ -34,9 +34,9 @@ fun FavoriteView(navigationController: NavController, weatherViewModel: WeatherV
                 .padding(bottom = 56.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Header("Favorites")
-            WeatherContent(weatherViewModel)
+            WeatherFavoriteContent(weatherViewModel)
         }
+        Header("Favorites")
 
         Box(
             modifier = Modifier
