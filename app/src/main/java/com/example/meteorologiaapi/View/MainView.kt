@@ -33,7 +33,7 @@ fun MainView(navigationController: NavController, weatherViewModel: WeatherViewM
                 .padding(bottom = 56.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Header()
+            Header("WeatherApp")
             WeatherContent(weatherViewModel)
         }
 
@@ -43,7 +43,7 @@ fun MainView(navigationController: NavController, weatherViewModel: WeatherViewM
                 .align(Alignment.BottomCenter)
                 .background(MaterialTheme.colorScheme.primary)
         ) {
-            Footer(navigationController)
+            Footer(navigationController, 1)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.meteorologiaapi.Component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +21,7 @@ import androidx.navigation.NavController
 import com.example.meteorologiaapi.Navigation.Routes
 
 @Composable
-fun Footer(navController: NavController) {
+fun Footer(navController: NavController, view: Int) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,30 +29,66 @@ fun Footer(navController: NavController) {
             .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        Button(
-            onClick = { /* Acció */ },
-            colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Home,
-                contentDescription = "Home",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
-            )
+        if (view == 1) {
+            Button(
+                onClick = {
+                    navController.navigate(Routes.View1.createRoute())
+                },
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                modifier = Modifier.border(1.dp, Color.White, MaterialTheme.shapes.large)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Home",
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+        } else {
+            Button(
+                onClick = {
+                    navController.navigate(Routes.View1.createRoute())
+                },
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Home",
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
         }
 
-        Button(
-            onClick = {
-                navController.navigate(Routes.View3.createRoute())
-            },
-            colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = "Favorite",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
-            )
+        if (view == 3) {
+            Button(
+                onClick = {
+                    navController.navigate(Routes.View3.createRoute())
+                },
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                modifier = Modifier.border(1.dp, Color.White, MaterialTheme.shapes.large)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = "Favorites",
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+        } else {
+            Button(
+                onClick = {
+                    navController.navigate(Routes.View3.createRoute())
+                },
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = "Favorites",
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
         }
     }
 }
