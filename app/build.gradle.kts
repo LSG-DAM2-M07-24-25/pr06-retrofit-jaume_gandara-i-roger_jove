@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-
     // LIVEDATA
     implementation("androidx.compose.runtime:runtime-livedata:1.7.5")
     // RETROFIT
