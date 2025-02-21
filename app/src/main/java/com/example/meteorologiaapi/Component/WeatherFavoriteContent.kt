@@ -40,84 +40,17 @@ import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 import kotlin.math.roundToInt
 
 @Composable
-fun WeatherContent(weatherViewModel: WeatherViewModel) {
-    var searchText by remember { mutableStateOf("") }
-    val weatherDataList by weatherViewModel.weatherDataList.observeAsState(emptyList())
+fun WeatherFavoriteContent(weatherViewModel: WeatherViewModel) {
+    val favoriteCities by weatherViewModel.favoriteWeatherData.observeAsState(emptyList())
     val error by weatherViewModel.error.observeAsState()
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(16.dp, top = 96.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Search Card
-        Card(
-            shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Default.LocationOn,
-                    contentDescription = "Location",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-
-                Box(
-                    modifier = Modifier
-                        .padding(start = 8.dp)
-                        .width(350.dp)
-                        .height(24.dp),
-                ) {
-                    if (searchText.isEmpty()) {
-                        Text(
-                            text = "Buscar ciudad...",
-                            fontSize = 18.sp,
-                            color = Color.Gray
-                        )
-                    }
-
-                    BasicTextField(
-                        value = searchText,
-                        onValueChange = { searchText = it },
-                        textStyle = TextStyle(fontSize = 18.sp),
-                        modifier = Modifier.width(300.dp)
-                    )
-
-                    Button(
-                        onClick = {
-                            if (searchText.isNotEmpty()) {
-                                weatherViewModel.getWeather(searchText)
-                                searchText = "" // Limpiar después de buscar
-                            }
-                        },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                        contentPadding = PaddingValues(0.dp),
-                        modifier = Modifier
-                            .size(32.dp)
-                            .align(Alignment.CenterEnd)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "Search",
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Weather Data Cards
-        weatherDataList.forEach { weather ->
+        favoriteCities.forEach { weather ->
             Card(
                 shape = RoundedCornerShape(16.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
@@ -170,7 +103,6 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        // Error message
         error?.let { errorMessage ->
             Card(
                 shape = RoundedCornerShape(16.dp),
