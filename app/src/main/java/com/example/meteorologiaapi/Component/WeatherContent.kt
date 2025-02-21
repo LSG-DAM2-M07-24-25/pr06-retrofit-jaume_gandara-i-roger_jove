@@ -3,6 +3,7 @@ package com.example.meteorologiaapi.Component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -23,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,10 +37,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meteorologiaapi.ViewModel.WeatherViewModel
+import kotlin.math.roundToInt
 
 @Composable
 fun WeatherContent(weatherViewModel: WeatherViewModel) {
-    var text by remember { mutableStateOf("") }
+    var searchText by remember { mutableStateOf("") }
+    val weatherDataList by weatherViewModel.weatherDataList.observeAsState(emptyList())
+    val error by weatherViewModel.error.observeAsState()
 
     Column(
         modifier = Modifier
@@ -45,6 +51,7 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Search Card
         Card(
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -68,28 +75,33 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
                         .width(350.dp)
                         .height(24.dp),
                 ) {
-                    if (text.isEmpty()) {
+                    if (searchText.isEmpty()) {
                         Text(
-                            text = "Madrid, España",
+                            text = "Buscar ciudad...",
                             fontSize = 18.sp,
                             color = Color.Gray
                         )
                     }
 
                     BasicTextField(
-                        value = text,
-                        onValueChange = { text = it },
+                        value = searchText,
+                        onValueChange = { searchText = it },
                         textStyle = TextStyle(fontSize = 18.sp),
                         modifier = Modifier.width(300.dp)
                     )
 
                     Button(
                         onClick = {
-                            // TODO: Implement search
+                            if (searchText.isNotEmpty()) {
+                                weatherViewModel.getWeather(searchText)
+                                searchText = "" // Limpiar después de buscar
+                            }
                         },
-                        colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                        contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp), // Elimina el padding intern del botó
-                        modifier = Modifier.size(32.dp).align(Alignment.CenterEnd)
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                        contentPadding = PaddingValues(0.dp),
+                        modifier = Modifier
+                            .size(32.dp)
+                            .align(Alignment.CenterEnd)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Search,
@@ -104,35 +116,72 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Card(
-            shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
+        // Weather Data Cards
+        weatherDataList.forEach { weather ->
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .padding(vertical = 8.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = weather.name,
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "${weather.main.temp.roundToInt()}°C",
+                        fontSize = 48.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = weather.weather.firstOrNull()?.description ?: "",
+                        fontSize = 24.sp
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        WeatherDetail("Humedad", "${weather.main.humidity}%")
+                        WeatherDetail("Viento", "${weather.wind.speed} m/s")
+                        WeatherDetail("Presión", "${weather.main.pressure} hPa")
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        WeatherDetail("Mín", "${weather.main.temp_min.roundToInt()}°C")
+                        WeatherDetail("Máx", "${weather.main.temp_max.roundToInt()}°C")
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
+        // Error message
+        error?.let { errorMessage ->
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFFFEBEE)),
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "22°C",
-                    fontSize = 48.sp,
-                    fontWeight = FontWeight.Bold
+                    text = errorMessage,
+                    color = Color.Red,
+                    modifier = Modifier.padding(16.dp)
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Soleado",
-                    fontSize = 24.sp
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    WeatherDetail("Humedad", "65%")
-                    WeatherDetail("Viento", "10 km/h")
-                }
             }
         }
     }
