@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.meteorologiaapi.R
 
 @Composable
-fun Header() {
+fun Header(title: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -43,7 +43,7 @@ fun Header() {
                 modifier = Modifier.size(48.dp)
             )
             Text(
-                text = "WeatherApp",
+                text = title,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
