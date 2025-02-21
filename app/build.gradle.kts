@@ -41,6 +41,18 @@ android {
 
 dependencies {
 
+    // LIVEDATA
+    implementation("androidx.compose.runtime:runtime-livedata:1.7.5")
+    // RETROFIT
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    // CORRUTINES
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    // GLIDE (si necesitas cargar imágenes)
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+    // Pruebas
+    testImplementation("junit:junit:4.13.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
