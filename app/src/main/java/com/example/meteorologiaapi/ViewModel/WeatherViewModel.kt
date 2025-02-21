@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class WeatherViewModel : ViewModel() {
+
+    private val apiKey = "59e48412122472d2fd190a7305ea14a4"
     private val repository = WeatherRepository()
 
     private val _weatherData = MutableLiveData<WeatherResponse>()
@@ -18,7 +20,7 @@ class WeatherViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    fun getWeather(city: String, apiKey: String) {
+    fun getWeather(city: String) {
         viewModelScope.launch {
             try {
                 val response: Response<WeatherResponse> = repository.getWeatherData(city, apiKey)
