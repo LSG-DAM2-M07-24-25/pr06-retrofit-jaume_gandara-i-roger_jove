@@ -2,6 +2,7 @@ package com.example.meteorologiaapi.Component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -41,9 +42,9 @@ import kotlin.math.roundToInt
 
 @Composable
 fun WeatherContent(weatherViewModel: WeatherViewModel) {
-    var searchText by remember { mutableStateOf("") }
     val weatherDataList by weatherViewModel.weatherDataList.observeAsState(emptyList())
     val error by weatherViewModel.error.observeAsState()
+    var searchText by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -51,64 +52,68 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Search Card
-        Card(
-            shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        BoxWithConstraints(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+            // Search Card
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                modifier = Modifier.fillMaxWidth(if (this.maxWidth > 600.dp) 0.8f else 1f)
             ) {
-                Icon(
-                    imageVector = Icons.Default.LocationOn,
-                    contentDescription = "Location",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-
-                Box(
+                Row(
                     modifier = Modifier
-                        .padding(start = 8.dp)
-                        .width(350.dp)
-                        .height(24.dp),
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    if (searchText.isEmpty()) {
-                        Text(
-                            text = "Buscar ciudad...",
-                            fontSize = 18.sp,
-                            color = Color.Gray
-                        )
-                    }
-
-                    BasicTextField(
-                        value = searchText,
-                        onValueChange = { searchText = it },
-                        textStyle = TextStyle(fontSize = 18.sp),
-                        modifier = Modifier.width(300.dp)
+                    Icon(
+                        imageVector = Icons.Default.LocationOn,
+                        contentDescription = "Location",
+                        tint = MaterialTheme.colorScheme.primary
                     )
 
-                    Button(
-                        onClick = {
-                            if (searchText.isNotEmpty()) {
-                                weatherViewModel.getWeather(searchText)
-                                searchText = "" // Limpiar después de buscar
-                            }
-                        },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                        contentPadding = PaddingValues(0.dp),
+                    Box(
                         modifier = Modifier
-                            .size(32.dp)
-                            .align(Alignment.CenterEnd)
+                            .padding(start = 8.dp)
+                            .width(350.dp)
+                            .height(24.dp),
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "Search",
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(32.dp)
+                        if (searchText.isEmpty()) {
+                            Text(
+                                text = "Buscar ciudad...",
+                                fontSize = 18.sp,
+                                color = Color.Gray
+                            )
+                        }
+
+                        BasicTextField(
+                            value = searchText,
+                            onValueChange = { searchText = it },
+                            textStyle = TextStyle(fontSize = 18.sp),
+                            modifier = Modifier.width(300.dp)
                         )
+
+                        Button(
+                            onClick = {
+                                if (searchText.isNotEmpty()) {
+                                    weatherViewModel.getWeather(searchText)
+                                    searchText = ""
+                                }
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                            contentPadding = PaddingValues(0.dp),
+                            modifier = Modifier
+                                .size(32.dp)
+                                .align(Alignment.CenterEnd)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Search",
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(32.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -116,58 +121,114 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Weather Data Cards
+        // Weather Cards
         weatherDataList.forEach { weather ->
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                    modifier = Modifier.fillMaxWidth(if (this.maxWidth > 600.dp) 0.8f else 1f)
                 ) {
-                    Text(
-                        text = weather.name,
-                        fontSize = 28.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "${weather.main.temp.roundToInt()}°C",
-                        fontSize = 48.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = weather.weather.firstOrNull()?.description ?: "",
-                        fontSize = 24.sp
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        WeatherDetail("Humidity", "${weather.main.humidity}%")
-                        WeatherDetail("Wind", "${weather.wind.speed} m/s")
-                        WeatherDetail("Pressure", "${weather.main.pressure} hPa")
-                    }
+                    BoxWithConstraints {
+                        if (this.maxWidth > 412.dp) {
+                            // Horizontal layout for wide screens
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(24.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                // Left column with main information
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = weather.name,
+                                        fontSize = 28.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Text(
+                                        text = "${weather.main.temp.roundToInt()}°C",
+                                        fontSize = 48.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Text(
+                                        text = weather.weather.firstOrNull()?.description ?: "",
+                                        fontSize = 24.sp
+                                    )
+                                }
 
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        WeatherDetail("Min", "${weather.main.temp_min.roundToInt()}°C")
-                        WeatherDetail("Max", "${weather.main.temp_max.roundToInt()}°C")
+                                // Right column with details
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceEvenly
+                                    ) {
+                                        WeatherDetail("Humidity", "${weather.main.humidity}%")
+                                        WeatherDetail("Wind", "${weather.wind.speed} m/s")
+                                        WeatherDetail("Pressure", "${weather.main.pressure} hPa")
+                                    }
+
+                                    Spacer(modifier = Modifier.height(16.dp))
+
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceEvenly
+                                    ) {
+                                        WeatherDetail("Min", "${weather.main.temp_min.roundToInt()}°C")
+                                        WeatherDetail("Max", "${weather.main.temp_max.roundToInt()}°C")
+                                    }
+                                }
+                            }
+                        } else {
+                            // Vertical layout for narrow screens
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(24.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = weather.name,
+                                    fontSize = 28.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = "${weather.main.temp.roundToInt()}°C",
+                                    fontSize = 48.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = weather.weather.firstOrNull()?.description ?: "",
+                                    fontSize = 24.sp
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    WeatherDetail("Humidity", "${weather.main.humidity}%")
+                                    WeatherDetail("Wind", "${weather.wind.speed} m/s")
+                                    WeatherDetail("Pressure", "${weather.main.pressure} hPa")
+                                }
+
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    WeatherDetail("Min", "${weather.main.temp_min.roundToInt()}°C")
+                                    WeatherDetail("Max", "${weather.main.temp_max.roundToInt()}°C")
+                                }
+                            }
+                        }
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp))
         }
 
         // Error message

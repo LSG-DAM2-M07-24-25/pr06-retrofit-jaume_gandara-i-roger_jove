@@ -1,15 +1,12 @@
 package com.example.meteorologiaapi.View
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,10 +16,14 @@ import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 import com.example.meteorologiaapi.Component.Header
 import com.example.meteorologiaapi.Component.Footer
 import com.example.meteorologiaapi.Component.WeatherContent
+import com.example.meteorologiaapi.Component.WeatherFavoriteContent
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun MainView(navigationController: NavController, weatherViewModel: WeatherViewModel) {
-    Box(
+    var showContent by remember { mutableStateOf(true) }
+
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFF5F5F5))
@@ -31,12 +32,32 @@ fun MainView(navigationController: NavController, weatherViewModel: WeatherViewM
             modifier = Modifier
                 .fillMaxSize()
                 .padding(bottom = 56.dp)
-                .verticalScroll(rememberScrollState())
         ) {
-            Header("WeatherApp")
-            WeatherContent(weatherViewModel)
+
+            // Content Area
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+            ) {
+                when (showContent) {
+                    true -> {
+                        Column {
+                            Header("WeatherApp")
+                            WeatherContent(weatherViewModel)
+                        }
+                    }
+                    false -> {
+                        Column {
+                            Header("Favorites")
+                            WeatherFavoriteContent(weatherViewModel)
+                        }
+                    }
+                }
+            }
         }
 
+        // Footer always visible at bottom
         Box(
             modifier = Modifier
                 .fillMaxWidth()
