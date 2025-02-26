@@ -14,6 +14,8 @@ class WeatherViewModel : ViewModel() {
     private val apiKey = "59e48412122472d2fd190a7305ea14a4"
     private val repository = WeatherRepository()
 
+    // We'll add Room functionality without changing the existing structure
+
     private val _weatherDataList = MutableLiveData<List<WeatherResponse>>(emptyList())
     val weatherDataList: LiveData<List<WeatherResponse>> = _weatherDataList
 
@@ -89,6 +91,8 @@ class WeatherViewModel : ViewModel() {
                         }
 
                         _favoriteWeatherData.value = updatedList
+
+                        // Here we could save to Room DB if properly set up
                     }
                 } else {
                     _error.value = "Error: ${response.message()} per a $city"
