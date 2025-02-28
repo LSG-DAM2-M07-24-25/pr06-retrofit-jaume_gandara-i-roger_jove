@@ -81,9 +81,9 @@ fun WeatherFavoriteContent(weatherViewModel: WeatherViewModel) {
                                     ) {
                                         WeatherDetail("Humidity", "${weather.main.humidity}%")
                                         WeatherDetail("Wind", "${weather.wind.speed} m/s")
-                                        WeatherDetail("Pressure", "${weather.main.pressure} hPa")
                                     }
 
+                                    Spacer(modifier = Modifier.height(16.dp))
                                     Spacer(modifier = Modifier.height(16.dp))
 
                                     Row(
@@ -126,9 +126,9 @@ fun WeatherFavoriteContent(weatherViewModel: WeatherViewModel) {
                                 ) {
                                     WeatherDetail("Humidity", "${weather.main.humidity}%")
                                     WeatherDetail("Wind", "${weather.wind.speed} m/s")
-                                    WeatherDetail("Pressure", "${weather.main.pressure} hPa")
                                 }
 
+                                Spacer(modifier = Modifier.height(16.dp))
                                 Spacer(modifier = Modifier.height(16.dp))
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),

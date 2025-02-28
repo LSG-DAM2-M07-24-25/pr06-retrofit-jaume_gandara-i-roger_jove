@@ -169,6 +169,14 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
                                     ) {
                                         WeatherDetail("Humidity", "${weather.main.humidity}%")
                                         WeatherDetail("Wind", "${weather.wind.speed} m/s")
+                                    }
+
+                                    Spacer(modifier = Modifier.height(16.dp))
+
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceEvenly
+                                    ) {
                                         WeatherDetail("Pressure", "${weather.main.pressure} hPa")
                                     }
 
