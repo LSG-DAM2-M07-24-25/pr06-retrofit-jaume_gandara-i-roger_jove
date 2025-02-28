@@ -1,16 +1,16 @@
-package com.example.meteorologiaapi.rom
+package com.example.meteorologiaapi.ROM
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.meteorologiaapi.model.Clouds
-import com.example.meteorologiaapi.model.Coord
-import com.example.meteorologiaapi.model.Main
-import com.example.meteorologiaapi.model.Sys
-import com.example.meteorologiaapi.model.Weather
-import com.example.meteorologiaapi.model.WeatherResponse
-import com.example.meteorologiaapi.model.Wind
+import com.example.meteorologiaapi.Model.Clouds
+import com.example.meteorologiaapi.Model.Coord
+import com.example.meteorologiaapi.Model.Main
+import com.example.meteorologiaapi.Model.Sys
+import com.example.meteorologiaapi.Model.Weather
+import com.example.meteorologiaapi.Model.WeatherResponse
+import com.example.meteorologiaapi.Model.Wind
 import androidx.room.TypeConverters
 
 @Database(

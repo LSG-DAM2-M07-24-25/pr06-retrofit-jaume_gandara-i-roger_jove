@@ -1,6 +1,6 @@
 package com.example.meteorologiaapi
 
-import com.example.meteorologiaapi.model.WeatherResponse
+import com.example.meteorologiaapi.Model.WeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

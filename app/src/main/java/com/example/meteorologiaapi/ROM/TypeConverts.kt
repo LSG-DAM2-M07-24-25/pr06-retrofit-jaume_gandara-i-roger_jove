@@ -1,7 +1,7 @@
-package com.example.meteorologiaapi.rom
+package com.example.meteorologiaapi.ROM
 
 import androidx.room.TypeConverter
-import com.example.meteorologiaapi.model.*
+import com.example.meteorologiaapi.Model.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

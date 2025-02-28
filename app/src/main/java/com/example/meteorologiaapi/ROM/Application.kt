@@ -1,4 +1,4 @@
-package com.example.meteorologiaapi.rom
+package com.example.meteorologiaapi.ROM
 
 import android.app.Application
 

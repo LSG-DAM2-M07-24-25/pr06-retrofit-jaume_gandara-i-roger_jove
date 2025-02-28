@@ -1,6 +1,6 @@
-package com.example.meteorologiaapi.rom
+package com.example.meteorologiaapi.ROM
 
-import com.example.meteorologiaapi.model.*
+import com.example.meteorologiaapi.Model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

@@ -1,4 +1,4 @@
-package com.example.meteorologiaapi.component
+package com.example.meteorologiaapi.Component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,7 +37,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.meteorologiaapi.viewModel.WeatherViewModel
+import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 import kotlin.math.roundToInt
 
 @Composable
@@ -59,7 +59,7 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
             Card(
                 shape = RoundedCornerShape(16.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-                modifier = Modifier.fillMaxWidth(if (this.maxWidth > 600.dp) 0.8f else 1f)
+                modifier = Modifier.fillMaxWidth(if (this.maxWidth > 600.dp) 1f else 1f)
             ) {
                 Row(
                     modifier = Modifier
@@ -131,7 +131,7 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-                    modifier = Modifier.fillMaxWidth(if (this.maxWidth > 600.dp) 0.8f else 1f)
+                    modifier = Modifier.fillMaxWidth(1f)
                 ) {
                     BoxWithConstraints {
                         if (this.maxWidth > 412.dp) {

@@ -1,13 +1,13 @@
-package com.example.meteorologiaapi.navigation
+package com.example.meteorologiaapi.Navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.meteorologiaapi.view.MainView
-import com.example.meteorologiaapi.view.DetailsView
-import com.example.meteorologiaapi.view.FavoriteView
-import com.example.meteorologiaapi.viewModel.WeatherViewModel
+import com.example.meteorologiaapi.View.MainView
+import com.example.meteorologiaapi.View.DetailsView
+import com.example.meteorologiaapi.View.FavoriteView
+import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 
 @Composable
 fun EntryPoint(navController: NavHostController, viewModel: WeatherViewModel) {
