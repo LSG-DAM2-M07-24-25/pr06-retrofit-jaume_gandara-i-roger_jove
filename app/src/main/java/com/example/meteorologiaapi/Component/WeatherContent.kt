@@ -1,5 +1,6 @@
 package com.example.meteorologiaapi.Component
 
+import android.text.Layout
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -76,7 +77,7 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
                     Box(
                         modifier = Modifier
                             .padding(start = 8.dp)
-                            .width(350.dp)
+                            .fillMaxWidth(1f)
                             .height(24.dp),
                     ) {
                         if (searchText.isEmpty()) {
@@ -91,7 +92,7 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
                             value = searchText,
                             onValueChange = { searchText = it },
                             textStyle = TextStyle(fontSize = 18.sp),
-                            modifier = Modifier.width(300.dp)
+                            modifier = Modifier.fillMaxWidth(1f)
                         )
 
                         Button(
