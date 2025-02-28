@@ -1,4 +1,4 @@
-package com.example.meteorologiaapi.Component
+package com.example.meteorologiaapi.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.meteorologiaapi.Navigation.Routes
+import com.example.meteorologiaapi.navigation.Routes
 
 @Composable
 fun Footer(navController: NavController, view: Int) {

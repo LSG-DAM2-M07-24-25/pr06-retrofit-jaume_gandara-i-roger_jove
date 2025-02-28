@@ -1,7 +1,6 @@
-package com.example.meteorologiaapi.ROM
+package com.example.meteorologiaapi.rom
 
 import android.app.Application
-import com.example.meteorologiaapi.ROM.WeatherDatabase
 
 class WeatherApplication : Application() {
 

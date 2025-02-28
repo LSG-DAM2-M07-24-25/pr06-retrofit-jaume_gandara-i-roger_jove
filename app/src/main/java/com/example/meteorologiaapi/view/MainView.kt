@@ -1,4 +1,4 @@
-package com.example.meteorologiaapi.View
+package com.example.meteorologiaapi.view
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.meteorologiaapi.ViewModel.WeatherViewModel
-import com.example.meteorologiaapi.Component.Header
-import com.example.meteorologiaapi.Component.Footer
-import com.example.meteorologiaapi.Component.WeatherContent
-import com.example.meteorologiaapi.Component.WeatherFavoriteContent
+import com.example.meteorologiaapi.viewModel.WeatherViewModel
+import com.example.meteorologiaapi.component.Header
+import com.example.meteorologiaapi.component.Footer
+import com.example.meteorologiaapi.component.WeatherContent
+import com.example.meteorologiaapi.component.WeatherFavoriteContent
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable

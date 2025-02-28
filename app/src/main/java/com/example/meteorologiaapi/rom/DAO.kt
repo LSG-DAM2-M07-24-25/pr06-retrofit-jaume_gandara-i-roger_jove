@@ -1,10 +1,10 @@
-package com.example.meteorologiaapi.ROM
+package com.example.meteorologiaapi.rom
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.meteorologiaapi.Model.*
+import com.example.meteorologiaapi.model.*
 
 @Dao
 interface WeatherDao {

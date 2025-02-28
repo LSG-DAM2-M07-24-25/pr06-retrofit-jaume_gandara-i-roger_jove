@@ -1,10 +1,10 @@
-package com.example.meteorologiaapi.ViewModel
+package com.example.meteorologiaapi.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.meteorologiaapi.Model.WeatherResponse
+import com.example.meteorologiaapi.model.WeatherResponse
 import com.example.meteorologiaapi.WeatherRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -33,8 +33,8 @@ class WeatherViewModel : ViewModel() {
     }
 
     private fun loadInitialCities() {
-        val cities = listOf("Barcelona")
-        val favoriteCities = listOf("Barcelona", "Valencia", "London")
+        val cities = listOf("Barcelona", "València")
+        val favoriteCities = listOf("Barcelona")
         cities.forEach { city -> getWeather(city) }
         favoriteCities.forEach { city -> addFavoriteCity(city) }
     }

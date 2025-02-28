@@ -1,4 +1,4 @@
-package com.example.meteorologiaapi.Component
+package com.example.meteorologiaapi.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

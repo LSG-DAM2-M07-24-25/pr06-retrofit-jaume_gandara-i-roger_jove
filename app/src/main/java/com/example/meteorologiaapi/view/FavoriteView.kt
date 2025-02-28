@@ -1,4 +1,4 @@
-package com.example.meteorologiaapi.View
+package com.example.meteorologiaapi.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -9,17 +9,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.meteorologiaapi.Component.Footer
-import com.example.meteorologiaapi.Component.Header
-import com.example.meteorologiaapi.Component.WeatherFavoriteContent
-import com.example.meteorologiaapi.ViewModel.WeatherViewModel
+import com.example.meteorologiaapi.component.Footer
+import com.example.meteorologiaapi.component.Header
+import com.example.meteorologiaapi.component.WeatherFavoriteContent
+import com.example.meteorologiaapi.viewModel.WeatherViewModel
 
 @Composable
 fun FavoriteView(navigationController: NavController, weatherViewModel: WeatherViewModel) {

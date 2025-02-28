@@ -1,4 +1,4 @@
-package com.example.meteorologiaapi.Navigation
+package com.example.meteorologiaapi.navigation
 
 sealed class Routes(val route: String) {
     object View1 : Routes("MainView") {
