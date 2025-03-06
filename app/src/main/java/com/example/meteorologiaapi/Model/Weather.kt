@@ -3,6 +3,14 @@ package com.example.meteorologiaapi.Model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+
+@Entity(tableName = "favorite_cities")
+data class FavoriteCity(
+    @PrimaryKey
+    val cityName: String,
+    val timestamp: Long = System.currentTimeMillis()
+)
+
 @Entity(tableName = "weather_response")
 data class WeatherResponse(
     @PrimaryKey val id: Int,
