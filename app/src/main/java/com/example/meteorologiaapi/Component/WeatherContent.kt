@@ -43,6 +43,7 @@ import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 import kotlin.math.roundToInt
 
 
+
 @Composable
 fun WeatherContent(weatherViewModel: WeatherViewModel) {
     val weatherDataList by weatherViewModel.weatherDataList.observeAsState(emptyList())

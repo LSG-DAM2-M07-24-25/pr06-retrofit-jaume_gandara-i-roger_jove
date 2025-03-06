@@ -136,7 +136,10 @@ class WeatherViewModel : ViewModel() {
         if (!currentFavorites.contains(city)) {
             currentFavorites.add(city)
             _favoriteCities.value = currentFavorites
-            getFavoriteWeather(city)
+            // Llama a getFavoriteWeather en un hilo de fondo
+            viewModelScope.launch {
+                getFavoriteWeather(city)
+            }
         }
     }
 
