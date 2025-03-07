@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.5.0")
     // LIVEDATA
     implementation("androidx.compose.runtime:runtime-livedata:1.7.5")
     // RETROFIT

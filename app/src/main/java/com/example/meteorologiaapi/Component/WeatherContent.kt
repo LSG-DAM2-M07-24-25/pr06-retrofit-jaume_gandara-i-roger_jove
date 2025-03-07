@@ -26,6 +26,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.meteorologiaapi.ViewModel.WeatherViewModel
 import kotlin.math.roundToInt
 
@@ -132,29 +133,48 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
                             .padding(24.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(
-                            text = weather.name,
-                            fontSize = 28.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            AsyncImage(
+                                model = "https://openweathermap.org/img/wn/${weather.weather.firstOrNull()?.icon}@4x.png",
+                                contentDescription = "Weather Icon",
+                                modifier = Modifier
+                                    .size(150.dp)
+                            )
 
-                        Spacer(modifier = Modifier.height(8.dp))
+                            Column(
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = weather.name,
+                                    fontSize = 28.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
 
-                        Text(
-                            text = "${weather.main.temp.roundToInt()}°C",
-                            fontSize = 48.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
-                        )
+                                Spacer(modifier = Modifier.height(4.dp))
 
-                        Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = "${weather.main.temp.roundToInt()}°C",
+                                    fontSize = 48.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
 
-                        Text(
-                            text = weather.weather.firstOrNull()?.description ?: "",
-                            fontSize = 24.sp,
-                            color = MaterialTheme.colorScheme.secondary
-                        )
+                                Spacer(modifier = Modifier.height(4.dp))
+
+                                Text(
+                                    text = weather.weather.firstOrNull()?.description ?: "",
+                                    fontSize = 24.sp,
+                                    color = MaterialTheme.colorScheme.secondary
+                                )
+                            }
+                        }
 
                         Spacer(modifier = Modifier.height(16.dp))
 
@@ -202,6 +222,8 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
                             }
                         },
                         modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentWidth(Alignment.End)
                             .padding(16.dp)
                     ) {
                         Icon(
