@@ -158,26 +158,41 @@ fun WeatherContent(weatherViewModel: WeatherViewModel) {
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // Additional Weather Details
                         Column(
                             horizontalAlignment = Alignment.Start,
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            WeatherDetail("Humidity", "${weather.main.humidity}%")
-                            WeatherDetail("Wind", "${weather.wind.speed} m/s")
-                            WeatherDetail("Pressure", "${weather.main.pressure} hPa")
-                            WeatherDetail("Min Temp", "${weather.main.temp_min.roundToInt()}°C")
-                            WeatherDetail("Max Temp", "${weather.main.temp_max.roundToInt()}°C")
+                            Row (
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                WeatherDetail("Humidity", "${weather.main.humidity}%")
+                                WeatherDetail("Wind", "${weather.wind.speed} m/s")
+                                WeatherDetail("Pressure", "${weather.main.pressure} hPa")
+                            }
+                            Row (
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                WeatherDetail("Min Temp", "${weather.main.temp_min.roundToInt()}°C")
+                                WeatherDetail("Feels Like", "${weather.main.feels_like.roundToInt()}°C")
+                                WeatherDetail("Max Temp", "${weather.main.temp_max.roundToInt()}°C")
+                            }
 
-                            // Add more details here if necessary
-                            WeatherDetail("Feels Like", "${weather.main.feels_like.roundToInt()}°C")
-                            WeatherDetail("Visibility", "${weather.visibility / 1000} km")
-                            WeatherDetail("Sunrise", "${weather.sys.sunrise}")
-                            WeatherDetail("Sunset", "${weather.sys.sunset}")
+                            Row (
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                WeatherDetail("Visibility", "${weather.visibility / 1000} km")
+                                WeatherDetail("Sunrise", "${weather.sys.sunrise}")
+                                WeatherDetail("Sunset", "${weather.sys.sunset}")
+                            }
                         }
                     }
 
-                    // Heart button to add/remove from favorites
                     IconButton(
                         onClick = {
                             if (weatherViewModel.isCityInFavorites(weather.name)) {
